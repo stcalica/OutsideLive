@@ -1,9 +1,11 @@
 package org.teaminfamous.outsidelive;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
 public class AreaSelection extends ActionBarActivity {
@@ -35,4 +37,9 @@ public class AreaSelection extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void showStage1(View v){
+        Intent stage_activity = new Intent(this, StageAcitivity.class);
+        startActivity(stage_activity);
+    }//start new intent
 }

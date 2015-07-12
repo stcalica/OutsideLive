@@ -4,6 +4,13 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.io.FileInputStream;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 
 public class StageAcitivity extends ActionBarActivity {
@@ -12,6 +19,7 @@ public class StageAcitivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stage_acitivity);
+        updateData();
     }
 
     @Override
@@ -35,4 +43,19 @@ public class StageAcitivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void updateData()
+    {
+        //read comments
+        ListView comments = (ListView) findViewById(R.id.comments);
+        try {
+
+            //parse data, comma delimited
+            List<String> comments_ar = Arrays.asList("SUP", "dis wack", "lol");
+            //create adapter
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, comments_ar);
+            comments.setAdapter(adapter);
+        } catch (Exception e){
+        }
+    }//update listview
 }
