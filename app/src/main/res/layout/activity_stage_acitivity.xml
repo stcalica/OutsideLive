@@ -2,9 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:orientation="vertical"
-    tools:context="org.teaminfamous.outsidelive.StageAcitivity">
+    tools:context="org.teaminfamous.outsidelive.StageAcitivity"
+    android:background="#FFEDD8">
 
     <!-- I moved this to widen display
 

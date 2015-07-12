@@ -4,7 +4,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".AreaSelection"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#FFEDD8">
 
 
     <ImageButton
@@ -15,7 +16,7 @@
         android:text="@string/stage_1"
         android:src="@drawable/stage1_buttona"
         android:scaleType="fitXY"
-        />
+        android:focusableInTouchMode="false" />
 
     <ImageButton
         android:id="@+id/stage2"
@@ -24,8 +25,7 @@
         android:layout_weight="0.2"
         android:text="@string/stage_1"
         android:src="@drawable/stage2_buttona"
-        android:scaleType="fitXY"
-        />
+        android:scaleType="fitXY" />
 
     <ImageButton
         android:id="@+id/stage3"
