@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 public class AreaSelection extends ActionBarActivity {
     public final static String STAGE_TITLE = "";
-    public final static int STAGE_NUMBER = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,20 +21,24 @@ public class AreaSelection extends ActionBarActivity {
         stage1.setImageResource(R.drawable.stage1_buttona);
         ImageButton stage2 = (ImageButton) findViewById(R.id.stage2);
         stage2.setImageResource(R.drawable.stage2_buttona);
+        ImageButton stage3 = (ImageButton) findViewById(R.id.stage3);
+        stage3.setImageResource(R.drawable.stage2_buttona);
         startStage1Listener();
         startStage2Listener();
+        startStage3Listener();
     }
 
     @Override
     protected void onResume(){
         super.onResume();
         ImageButton stage1 = (ImageButton) findViewById(R.id.stage1);
-
         stage1.setImageResource(R.drawable.stage1_buttona);
 
         ImageButton stage2 = (ImageButton) findViewById(R.id.stage2);
         stage2.setImageResource(R.drawable.stage2_buttona);
 
+        ImageButton stage3 = (ImageButton) findViewById(R.id.stage3);
+        stage3.setImageResource(R.drawable.stage2_buttona);
     }
 
     @Override
@@ -101,6 +104,26 @@ public class AreaSelection extends ActionBarActivity {
                 startActivity(stage_activity);
 
                 stage2.setImageResource(R.drawable.stage1_buttonb);
+            }
+
+        });
+
+    }
+
+    public void startStage3Listener() {
+
+        final ImageButton stage3 = (ImageButton) findViewById(R.id.stage3);
+
+        stage3.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent stage_activity = new Intent(AreaSelection.this, StageAcitivity.class);
+                stage_activity.putExtra(STAGE_TITLE, "Beer Garden");
+                stage_activity.putExtra("STAGE_NUMBER", 3);
+                startActivity(stage_activity);
+
+                stage3.setImageResource(R.drawable.stage1_buttonb);
             }
 
         });
