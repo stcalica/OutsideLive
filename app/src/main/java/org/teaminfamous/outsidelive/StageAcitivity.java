@@ -43,7 +43,6 @@ public class StageAcitivity extends ActionBarActivity {
         //enable javascript
         WebSettings webSettings = myWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        myWebView.loadUrl(getResources().getString(R.string.chat_URL));
 
         mPlayer = new MediaPlayer();
         mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -57,14 +56,17 @@ public class StageAcitivity extends ActionBarActivity {
         if(stg_num == 1) {
             mPlayer = MediaPlayer.create(this, Uri.parse(getResources().getString(R.string.stage_1_URL)));
             mPlayer.start();
+            myWebView.loadUrl(getResources().getString(R.string.chat_URL));
         }//if stage 1
         else if(stg_num == 2){
             mPlayer = MediaPlayer.create(this, Uri.parse(getResources().getString(R.string.stage_2_URL)));
             mPlayer.start();
+            myWebView.loadUrl(getResources().getString(R.string.chat_URL));
         }
         else if(stg_num == 3){
             View fl = findViewById(R.id.visualizerArea);
             fl.setVisibility(View.INVISIBLE);
+            myWebView.loadUrl(getResources().getString(R.string.chat2_URL));
         }
 
         updateData();
