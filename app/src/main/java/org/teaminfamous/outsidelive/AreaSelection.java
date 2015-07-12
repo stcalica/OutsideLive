@@ -18,11 +18,11 @@ public class AreaSelection extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_area_selection);
         ImageButton stage1 = (ImageButton) findViewById(R.id.stage1);
-        stage1.setImageResource(R.drawable.stage1_buttona);
+        stage1.setImageResource(R.drawable.b1);
         ImageButton stage2 = (ImageButton) findViewById(R.id.stage2);
-        stage2.setImageResource(R.drawable.stage2_buttona);
+        stage2.setImageResource(R.drawable.b2);
         ImageButton stage3 = (ImageButton) findViewById(R.id.stage3);
-        stage3.setImageResource(R.drawable.stage2_buttona);
+        stage3.setImageResource(R.drawable.b3);
         startStage1Listener();
         startStage2Listener();
         startStage3Listener();
@@ -32,13 +32,13 @@ public class AreaSelection extends ActionBarActivity {
     protected void onResume(){
         super.onResume();
         ImageButton stage1 = (ImageButton) findViewById(R.id.stage1);
-        stage1.setImageResource(R.drawable.stage1_buttona);
+        stage1.setImageResource(R.drawable.b1);
 
         ImageButton stage2 = (ImageButton) findViewById(R.id.stage2);
-        stage2.setImageResource(R.drawable.stage2_buttona);
+        stage2.setImageResource(R.drawable.b2);
 
         ImageButton stage3 = (ImageButton) findViewById(R.id.stage3);
-        stage3.setImageResource(R.drawable.stage2_buttona);
+        stage3.setImageResource(R.drawable.b3);
     }
 
     @Override
