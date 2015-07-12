@@ -72,8 +72,8 @@ public class StageAcitivity extends ActionBarActivity {
             myWebView.loadUrl(getResources().getString(R.string.chat_URL));
         }
         else if(stg_num == 3){
-            View fl = findViewById(R.id.visualizerArea);
-            fl.setVisibility(View.INVISIBLE);
+            mPlayer = MediaPlayer.create(this, R.raw.mozart);
+            mPlayer.start();
             myWebView.loadUrl(getResources().getString(R.string.chat2_URL));
         }
 
