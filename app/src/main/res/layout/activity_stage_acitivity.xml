@@ -20,10 +20,20 @@
         android:layout_height="0dp"
         android:layout_width="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_weight="0.7"
+        android:layout_weight="0.6"
         android:divider="@null"
         android:dividerHeight="0dp">
     </ListView>
+
+    <EditText android:id="@+id/edit_message"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:hint="@string/edit_message"
+        android:singleLine="true"
+        android:inputType="text"
+        android:imeOptions="actionGo"
+
+        />
 
 
 
