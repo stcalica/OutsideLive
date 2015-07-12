@@ -1,5 +1,6 @@
 package org.teaminfamous.outsidelive;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.media.AudioManager;
@@ -33,6 +34,10 @@ public class StageAcitivity extends ActionBarActivity {
         mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mPlayer = MediaPlayer.create(this, Uri.parse("http://be57e571.ngrok.io/live"));
         mPlayer.start();
+
+        Intent intent = getIntent();
+        String stage = intent.getStringExtra(AreaSelection.STAGE_TITLE);
+        setTitle(stage);
         updateData();
     }
 

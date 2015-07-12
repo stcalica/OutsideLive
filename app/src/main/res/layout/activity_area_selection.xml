@@ -23,7 +23,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.2"
         android:text="@string/stage_1"
-        android:src="@drawable/stage1_buttona"
+        android:src="@drawable/stage2_buttona"
         android:scaleType="fitXY"
         />
 

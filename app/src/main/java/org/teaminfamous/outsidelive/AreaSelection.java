@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 
 public class AreaSelection extends ActionBarActivity {
+    public final static String STAGE_TITLE = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,14 +19,22 @@ public class AreaSelection extends ActionBarActivity {
         setContentView(R.layout.activity_area_selection);
         ImageButton stage1 = (ImageButton) findViewById(R.id.stage1);
         stage1.setImageResource(R.drawable.stage1_buttona);
+        ImageButton stage2 = (ImageButton) findViewById(R.id.stage2);
+        stage2.setImageResource(R.drawable.stage2_buttona);
         startStage1Listener();
+        startStage2Listener();
     }
 
     @Override
     protected void onResume(){
         super.onResume();
         ImageButton stage1 = (ImageButton) findViewById(R.id.stage1);
+
         stage1.setImageResource(R.drawable.stage1_buttona);
+
+        ImageButton stage2 = (ImageButton) findViewById(R.id.stage2);
+        stage2.setImageResource(R.drawable.stage2_buttona);
+
     }
 
     @Override
@@ -50,10 +59,12 @@ public class AreaSelection extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /*
     public void showStage1(View v){
         Intent stage_activity = new Intent(this, StageAcitivity.class);
+
         startActivity(stage_activity);
-    }//start new intent
+    }//start new intent*/
 
     public void startStage1Listener() {
 
@@ -64,9 +75,29 @@ public class AreaSelection extends ActionBarActivity {
             @Override
             public void onClick(View arg0) {
                 Intent stage_activity = new Intent(AreaSelection.this, StageAcitivity.class);
+                stage_activity.putExtra(STAGE_TITLE, "Stage 1 - The Black Keys");
                 startActivity(stage_activity);
 
                     stage1.setImageResource(R.drawable.stage1_buttonb);
+            }
+
+        });
+
+    }
+
+    public void startStage2Listener() {
+
+        final ImageButton stage2 = (ImageButton) findViewById(R.id.stage2);
+
+        stage2.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent stage_activity = new Intent(AreaSelection.this, StageAcitivity.class);
+                stage_activity.putExtra(STAGE_TITLE, "Stage 2 - Kendrick Lamar");
+                startActivity(stage_activity);
+
+                stage2.setImageResource(R.drawable.stage1_buttonb);
             }
 
         });
