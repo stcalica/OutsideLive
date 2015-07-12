@@ -51,7 +51,7 @@ public class BarGraphRenderer extends Renderer {
             if(mTop)
             {
                 mFFTPoints[i * 4 + 1] = 0;
-                mFFTPoints[i * 4 + 3] = (dbValue * 4 - 10);
+                mFFTPoints[i * 4 + 3] = (dbValue * 8 - 10);
             }
             else
             {

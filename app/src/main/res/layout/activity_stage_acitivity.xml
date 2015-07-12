@@ -18,12 +18,13 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#000" >
+        android:background="#0FFF" >
 
         <org.teaminfamous.outsidelive.VisualizerView
             android:id="@+id/visualizerView"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent" >
+            <requestFocus></requestFocus>
         </org.teaminfamous.outsidelive.VisualizerView>
     </FrameLayout>
 
