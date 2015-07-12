@@ -8,7 +8,7 @@
     <string name="stage_1">Stage 1</string>
     <string name="edit_message">How\'s the concert going?</string>
 
-    <string name="stage_1_URL">http://be57e571.ngrok.io/live</string>
+    <string name="stage_1_URL">http://e7696a80.ngrok.io/live</string>
     <string name="stage_2_URL">http://11786054.ngrok.io/live</string>
     <string name="chat_URL">http://b4e5b7de.ngrok.io/</string>
     <string name="chat2_URL">http://53407510.ngrok.io</string>
