@@ -1,6 +1,9 @@
 package org.teaminfamous.outsidelive;
 
+import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -26,6 +29,9 @@ public class AreaSelection extends ActionBarActivity {
         startStage1Listener();
         startStage2Listener();
         startStage3Listener();
+
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#6DCAD6"));
+        getSupportActionBar().setBackgroundDrawable(colorDrawable);
     }
 
     @Override
@@ -57,7 +63,8 @@ public class AreaSelection extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            finish();
+            System.exit(0);
         }
 
         return super.onOptionsItemSelected(item);

@@ -2,7 +2,7 @@
     <string name="app_name">OutsideLive</string>
 
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Quit</string>
     <string name="title_activity_stage_acitivity">StageAcitivity</string>
 
     <string name="stage_1">Stage 1</string>
