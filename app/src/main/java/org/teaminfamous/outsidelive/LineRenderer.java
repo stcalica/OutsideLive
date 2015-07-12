@@ -81,9 +81,9 @@ public class LineRenderer extends Renderer{
     private float colorCounter = 0;
     private void cycleColor()
     {
-        int r = (int)Math.floor(128*(Math.sin(colorCounter) + 3));
-        int g = (int)Math.floor(128*(Math.sin(colorCounter + 1) + 1));
-        int b = (int)Math.floor(128*(Math.sin(colorCounter + 7) + 1));
+        int r = (int)Math.floor(200*(Math.sin(colorCounter) + 3));
+        int g = (int)Math.floor(170*(Math.sin(colorCounter + 1) + 1));
+        int b = (int)Math.floor(150*(Math.sin(colorCounter + 7) + 1));
         mPaint.setColor(Color.argb(128, r, g, b));
         colorCounter += 0.03;
     }

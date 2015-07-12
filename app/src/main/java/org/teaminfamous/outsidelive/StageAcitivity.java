@@ -86,8 +86,8 @@ public class StageAcitivity extends ActionBarActivity {
         mVisualizerView = (VisualizerView) findViewById(R.id.visualizerView);
         mVisualizerView.link(mPlayer);
 
-        addBarGraphRenderers();
-        //addLineRenderer();
+        //addBarGraphRenderers();
+        addLineRenderer();
     }
 
     private void cleanUp()
@@ -100,24 +100,24 @@ public class StageAcitivity extends ActionBarActivity {
         }
     }
 
-    /*
+
     private void addLineRenderer()
     {
 
         Paint linePaint = new Paint();
-        linePaint.setStrokeWidth(1f);
+        linePaint.setStrokeWidth(5f);
         linePaint.setAntiAlias(true);
-        linePaint.setColor(Color.argb(88, 0, 128, 255));
+        linePaint.setColor(Color.argb(150, 255, 60, 60));
 
         Paint lineFlashPaint = new Paint();
-        lineFlashPaint.setStrokeWidth(5f);
+        lineFlashPaint.setStrokeWidth(10f);
         lineFlashPaint.setAntiAlias(true);
-        lineFlashPaint.setColor(Color.argb(188, 255, 255, 255));
+        lineFlashPaint.setColor(Color.argb(255, 60, 255, 255));
         LineRenderer lineRenderer = new LineRenderer(linePaint, lineFlashPaint, true);
         mVisualizerView.addRenderer(lineRenderer);
 
     }
-    */
+
 
     private void addBarGraphRenderers()
     {
