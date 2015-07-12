@@ -10,6 +10,6 @@
 
     <string name="stage_1_URL">http://be57e571.ngrok.io/live</string>
     <string name="stage_2_URL">http://11786054.ngrok.io/live</string>
-    <string name="chat_URL">http://33107f6e.ngrok.io/</string>
-    <string name="chat2_URL">http://8767516d.ngrok.io</string>
+    <string name="chat_URL">http://590795cb.ngrok.io/</string>
+    <string name="chat2_URL">http://f5a73a98.ngrok.io</string>
 </resources>
