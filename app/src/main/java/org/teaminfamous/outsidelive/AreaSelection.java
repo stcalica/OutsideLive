@@ -79,7 +79,7 @@ public class AreaSelection extends ActionBarActivity {
             @Override
             public void onClick(View arg0) {
                 Intent stage_activity = new Intent(AreaSelection.this, StageAcitivity.class);
-                stage_activity.putExtra(STAGE_TITLE, "Stage 1 - The Black Keys");
+                stage_activity.putExtra(STAGE_TITLE, "Stage 1 - Twin Peaks");
                 stage_activity.putExtra("STAGE_NUMBER", 1);
                 startActivity(stage_activity);
 
@@ -99,7 +99,7 @@ public class AreaSelection extends ActionBarActivity {
             @Override
             public void onClick(View arg0) {
                 Intent stage_activity = new Intent(AreaSelection.this, StageAcitivity.class);
-                stage_activity.putExtra(STAGE_TITLE, "Stage 2 - Kendrick Lamar");
+                stage_activity.putExtra(STAGE_TITLE, "Stage 2 - Land's End");
                 stage_activity.putExtra("STAGE_NUMBER", 2);
                 startActivity(stage_activity);
 
