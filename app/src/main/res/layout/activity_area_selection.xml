@@ -44,6 +44,7 @@
         android:layout_weight="0.4"
         android:src="@drawable/logo"
         android:scaleType="fitCenter"
+        android:background="#F58B46"
         />
 
 </LinearLayout>
