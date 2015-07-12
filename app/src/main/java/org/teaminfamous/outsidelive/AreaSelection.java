@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 public class AreaSelection extends ActionBarActivity {
     public final static String STAGE_TITLE = "";
+    public final static int STAGE_NUMBER = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,9 +77,10 @@ public class AreaSelection extends ActionBarActivity {
             public void onClick(View arg0) {
                 Intent stage_activity = new Intent(AreaSelection.this, StageAcitivity.class);
                 stage_activity.putExtra(STAGE_TITLE, "Stage 1 - The Black Keys");
+                stage_activity.putExtra("STAGE_NUMBER", 1);
                 startActivity(stage_activity);
 
-                    stage1.setImageResource(R.drawable.stage1_buttonb);
+                stage1.setImageResource(R.drawable.stage1_buttonb);
             }
 
         });
@@ -95,6 +97,7 @@ public class AreaSelection extends ActionBarActivity {
             public void onClick(View arg0) {
                 Intent stage_activity = new Intent(AreaSelection.this, StageAcitivity.class);
                 stage_activity.putExtra(STAGE_TITLE, "Stage 2 - Kendrick Lamar");
+                stage_activity.putExtra("STAGE_NUMBER", 2);
                 startActivity(stage_activity);
 
                 stage2.setImageResource(R.drawable.stage1_buttonb);
