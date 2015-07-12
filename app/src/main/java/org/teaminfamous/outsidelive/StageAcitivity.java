@@ -5,6 +5,7 @@ import android.content.Entity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.ColorDrawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.audiofx.Visualizer;
@@ -92,6 +93,9 @@ public class StageAcitivity extends ActionBarActivity {
             mPlayer.start();
             myWebView.loadUrl(getResources().getString(R.string.chat2_URL));
         }
+
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#6DCAD6"));
+        getSupportActionBar().setBackgroundDrawable(colorDrawable);
 
         updateData();
     }
