@@ -57,7 +57,7 @@ public class VisualizerView extends View{
         mFFTBytes = null;
 
         mFlashPaint.setColor(Color.argb(255, 255, 0, 0));
-        mFadePaint.setColor(Color.argb(255, 0, 0, 255));
+        mFadePaint.setColor(Color.argb(150, 255, 255, 255));
         mFadePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.MULTIPLY));
     }
 
@@ -77,7 +77,7 @@ public class VisualizerView extends View{
             }
 
             @Override
-            public void onFftDataCapture(Visualizer visualizer, byte[] bytes, int sampligRate) {
+            public void onFftDataCapture(Visualizer visualizer, byte[] bytes, int samplingRate) {
                 updateVisualizerFFT(bytes);
             }
         };
