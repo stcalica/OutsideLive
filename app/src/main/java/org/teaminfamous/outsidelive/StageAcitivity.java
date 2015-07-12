@@ -11,10 +11,13 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import java.io.FileInputStream;
@@ -58,6 +61,10 @@ public class StageAcitivity extends ActionBarActivity {
         else if(stg_num == 2){
             mPlayer = MediaPlayer.create(this, Uri.parse(getResources().getString(R.string.stage_2_URL)));
             mPlayer.start();
+        }
+        else if(stg_num == 3){
+            View fl = findViewById(R.id.visualizerArea);
+            fl.setVisibility(View.INVISIBLE);
         }
 
         updateData();
