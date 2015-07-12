@@ -90,6 +90,10 @@ public class StageAcitivity extends ActionBarActivity {
     {
         cleanUp();
         super.onPause();
+        PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "My Tag");
+        if (wl.isHeld())
+            wl.release();
     }
 
     @Override
@@ -99,7 +103,8 @@ public class StageAcitivity extends ActionBarActivity {
         super.onDestroy();
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "My Tag");
-        wl.release();
+        if (wl.isHeld())
+            wl.release();
 
     }
 
