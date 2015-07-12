@@ -6,24 +6,55 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.audiofx.Visualizer;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.BufferedInputStream;
 import java.io.FileInputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import org.teaminfamous.outsidelive.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.teaminfamous.outsidelive.R;
+import com.github.nkzawa.socketio.client.IO;
+import com.github.nkzawa.socketio.client.Socket;
+import com.github.nkzawa.emitter.Emitter;
 
 
 public class StageAcitivity extends ActionBarActivity {
     private MediaPlayer mPlayer;
     private VisualizerView mVisualizerView;
+    private Socket mSocket;
+    {
+        try {
+            mSocket = IO.socket("http://chat.socket.io");
+        } catch (URISyntaxException e) {}
+    }
+
+    public List<String> comments_ar = Arrays.asList("SUP", "dis wack", "lol",
+            "This piece of music expresses the nuances of life involving the lights of the petal flower.",
+            "kappa kappa", "FREEDOM!", "kappa", "heyoo", "great set", "where dey at doe?", "TEST");
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,26 +64,34 @@ public class StageAcitivity extends ActionBarActivity {
         mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mPlayer = MediaPlayer.create(this, Uri.parse("http://be57e571.ngrok.io/live"));
         mPlayer.start();
-        updateData();
+        mSocket.on("new message", onNewMessage);
+        mSocket.connect();
+        setGoListener();
+        ListView comments = (ListView) findViewById(R.id.comments);
+        try {
+            //create adapter
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, comments_ar);
+            comments.setAdapter(adapter);
+        } catch (Exception e){
+        }
     }
 
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
         init();
     }
 
-    protected  void onPause()
-    {
+    protected  void onPause() {
         cleanUp();
         super.onPause();
     }
 
     @Override
-    protected void onDestroy()
-    {
+    protected void onDestroy() {
         cleanUp();
         super.onDestroy();
+        mSocket.disconnect();
+        mSocket.off("new message", onNewMessage);
     }
 
     private void init() {
@@ -125,20 +164,61 @@ public class StageAcitivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void updateData()
+    private void loadChat()
     {
         //read comments
-        ListView comments = (ListView) findViewById(R.id.comments);
-        try {
 
-            //parse data, comma delimited
-            List<String> comments_ar = Arrays.asList("SUP", "dis wack", "lol",
-                    "This piece of music expresses the nuances of life involving the lights of the petal flower.",
-                    "kappa kappa", "FREEDOM!", "kappa", "heyoo", "great set", "where dey at doe?", "TEST");
-            //create adapter
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, comments_ar);
-            comments.setAdapter(adapter);
-        } catch (Exception e){
-        }
     }//update listview
-}
+
+    public void setGoListener() {
+        EditText mInputMessageView = (EditText) findViewById(R.id.edit_message);
+        mInputMessageView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_GO) {
+                    EditText mInputMessageView = (EditText) findViewById(R.id.edit_message);
+                    String message = mInputMessageView.getText().toString().trim();
+                   /* if (TextUtils.isEmpty(message)) {
+                        return;
+                    }*/
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                    mInputMessageView.setText("");
+                    mSocket.emit("new message", message);
+                }//end if
+                return true;
+            }
+        });
+    }
+
+    private Emitter.Listener onNewMessage = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            Runnable newmsg = new Runnable() {
+                @Override
+                public void run() {
+                    JSONObject data = (JSONObject) args[0];
+                    String message;
+                    try {
+                        message = data.getString("message");
+                    } catch (JSONException e) {
+                        return;
+                    }
+
+                    // add the message to view
+                    comments_ar.add(message);
+                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                }
+            };
+            newmsg.run();
+        }
+    };
+
+
+
+
+
+}//end of activity
+
+
+
+
