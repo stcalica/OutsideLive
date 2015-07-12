@@ -1,5 +1,11 @@
 package org.teaminfamous.outsidelive;
 
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.audiofx.Visualizer;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,15 +17,74 @@ import java.io.FileInputStream;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import org.teaminfamous.outsidelive.R;
+
 
 
 public class StageAcitivity extends ActionBarActivity {
+    private MediaPlayer mPlayer;
+    private VisualizerView mVisualizerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stage_acitivity);
+        mPlayer = new MediaPlayer();
+        mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mPlayer = MediaPlayer.create(this, Uri.parse("http://be57e571.ngrok.io/live"));
+        mPlayer.start();
         updateData();
+    }
+
+    protected void onResume()
+    {
+        super.onResume();
+        init();
+    }
+
+    protected  void onPause()
+    {
+        cleanUp();
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        cleanUp();
+        super.onDestroy();
+    }
+
+    private void init() {
+        mVisualizerView = (VisualizerView) findViewById(R.id.visualizerView);
+        mVisualizerView.link(mPlayer);
+
+        addLineRenderer();
+    }
+
+    private void cleanUp()
+    {
+        if (mPlayer != null)
+        {
+            mVisualizerView.release();
+            mPlayer.release();
+            mPlayer = null;
+        }
+    }
+
+    private void addLineRenderer()
+    {
+        Paint linePaint = new Paint();
+        linePaint.setStrokeWidth(1f);
+        linePaint.setAntiAlias(true);
+        linePaint.setColor(Color.argb(88, 0, 128, 255));
+
+        Paint lineFlashPaint = new Paint();
+        lineFlashPaint.setStrokeWidth(5f);
+        lineFlashPaint.setAntiAlias(true);
+        lineFlashPaint.setColor(Color.argb(188, 255, 255, 255));
+        LineRenderer lineRenderer = new LineRenderer(linePaint, lineFlashPaint, true);
+        mVisualizerView.addRenderer(lineRenderer);
     }
 
     @Override
