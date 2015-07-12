@@ -11,6 +11,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -30,10 +33,17 @@ public class StageAcitivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stage_acitivity);
+
+        //messenger webview
+        WebView myWebView = (WebView) findViewById(R.id.webview);
+        myWebView.setWebViewClient(new WebViewClient());
+        //enable javascript
+        WebSettings webSettings = myWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        myWebView.loadUrl(getResources().getString(R.string.chat_URL));
+
         mPlayer = new MediaPlayer();
         mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-
-
 
         Intent intent = getIntent();
         String stage = intent.getStringExtra(AreaSelection.STAGE_TITLE);
@@ -143,7 +153,7 @@ public class StageAcitivity extends ActionBarActivity {
     }
 
     private void updateData()
-    {
+    {/*
         //read comments
         ListView comments = (ListView) findViewById(R.id.comments);
         try {
@@ -156,6 +166,6 @@ public class StageAcitivity extends ActionBarActivity {
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, comments_ar);
             comments.setAdapter(adapter);
         } catch (Exception e){
-        }
+        }*/
     }//update listview
 }
