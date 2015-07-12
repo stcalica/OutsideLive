@@ -8,12 +8,23 @@
     tools:context="org.teaminfamous.outsidelive.StageAcitivity">
 
     <ListView
-        android:id="@+id/comments"
-        android:layout_height="300dp"
+        android:id="@+id/comments2"
+        android:layout_height="0dp"
         android:layout_width="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_weight="1">
+        android:layout_weight="0.3">
     </ListView>
+
+    <ListView
+        android:id="@+id/comments"
+        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_weight="0.7"
+        android:divider="@null"
+        android:dividerHeight="0dp">
+    </ListView>
+
 
 
 

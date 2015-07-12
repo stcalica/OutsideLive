@@ -51,7 +51,9 @@ public class StageAcitivity extends ActionBarActivity {
         try {
 
             //parse data, comma delimited
-            List<String> comments_ar = Arrays.asList("SUP", "dis wack", "lol");
+            List<String> comments_ar = Arrays.asList("SUP", "dis wack", "lol",
+                    "This piece of music expresses the nuances of life involving the lights of the petal flower.",
+                    "kappa kappa", "FREEDOM!", "kappa", "heyoo", "great set", "where dey at doe?", "TEST");
             //create adapter
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, comments_ar);
             comments.setAdapter(adapter);
