@@ -1,6 +1,7 @@
 package org.teaminfamous.outsidelive;
 
 import android.content.Context;
+import android.content.Entity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -8,9 +9,11 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.audiofx.Visualizer;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.PowerManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,10 +26,24 @@ import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.teaminfamous.outsidelive.R;
 
 
@@ -34,7 +51,7 @@ import org.teaminfamous.outsidelive.R;
 public class StageAcitivity extends ActionBarActivity {
     private MediaPlayer mPlayer;
     private VisualizerView mVisualizerView;
-
+    public  String Weatherjson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,17 +78,16 @@ public class StageAcitivity extends ActionBarActivity {
 
         int stg_num = intent.getIntExtra("STAGE_NUMBER", 0);
 
-        if(stg_num == 1) {
+        if (stg_num == 1) {
             mPlayer = MediaPlayer.create(this, Uri.parse(getResources().getString(R.string.stage_1_URL)));
             mPlayer.start();
             myWebView.loadUrl(getResources().getString(R.string.chat_URL));
         }//if stage 1
-        else if(stg_num == 2){
+        else if (stg_num == 2) {
             mPlayer = MediaPlayer.create(this, Uri.parse(getResources().getString(R.string.stage_2_URL)));
             mPlayer.start();
             myWebView.loadUrl(getResources().getString(R.string.chat_URL));
-        }
-        else if(stg_num == 3){
+        } else if (stg_num == 3) {
             mPlayer = MediaPlayer.create(this, R.raw.mozart);
             mPlayer.start();
             myWebView.loadUrl(getResources().getString(R.string.chat2_URL));
@@ -80,14 +96,12 @@ public class StageAcitivity extends ActionBarActivity {
         updateData();
     }
 
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
         init();
     }
 
-    protected  void onPause()
-    {
+    protected void onPause() {
         cleanUp();
         super.onPause();
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
@@ -97,8 +111,7 @@ public class StageAcitivity extends ActionBarActivity {
     }
 
     @Override
-    protected void onDestroy()
-    {
+    protected void onDestroy() {
         cleanUp();
         super.onDestroy();
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
@@ -116,10 +129,8 @@ public class StageAcitivity extends ActionBarActivity {
         addLineRenderer();
     }
 
-    private void cleanUp()
-    {
-        if (mPlayer != null)
-        {
+    private void cleanUp() {
+        if (mPlayer != null) {
             mVisualizerView.release();
             mPlayer.release();
             mPlayer = null;
@@ -127,8 +138,7 @@ public class StageAcitivity extends ActionBarActivity {
     }
 
 
-    private void addLineRenderer()
-    {
+    private void addLineRenderer() {
 
         Paint linePaint = new Paint();
         linePaint.setStrokeWidth(5f);
@@ -145,8 +155,7 @@ public class StageAcitivity extends ActionBarActivity {
     }
 
 
-    private void addBarGraphRenderers()
-    {
+    private void addBarGraphRenderers() {
         Paint paint2 = new Paint();
         paint2.setStrokeWidth(12f);
         paint2.setAntiAlias(true);
@@ -178,20 +187,48 @@ public class StageAcitivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void updateData()
-    {/*
-        //read comments
-        ListView comments = (ListView) findViewById(R.id.comments);
-        try {
+    private void updateData() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Log.d("UpdateData", "Here");
+                    int resp = 666;
+                    HttpClient httpclient = new DefaultHttpClient();
+                    HttpGet httpPost = new HttpGet("http://api.wunderground.com/api/013ca7a73d07e736/geolookup/conditions/q/CA/San_Francisco.json");
+                    try {
+                        HttpResponse httpResponse = httpclient.execute(httpPost);
+                        HttpEntity entity = httpResponse.getEntity();
+                        BufferedReader rd = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent()));
+                        String body = "";
+                        while ((body = rd.readLine()) != null)
+                        {
+                            Log.e("UpdateData", body);
+                        }
+                        Weatherjson = body;
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }).start();
 
-            //parse data, comma delimited
-            List<String> comments_ar = Arrays.asList("SUP", "dis wack", "lol",
-                    "This piece of music expresses the nuances of life involving the lights of the petal flower.",
-                    "kappa kappa", "FREEDOM!", "kappa", "heyoo", "great set", "where dey at doe?", "TEST");
-            //create adapter
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, comments_ar);
-            comments.setAdapter(adapter);
-        } catch (Exception e){
-        }*/
     }//update listview
+
+    class WeatherData extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected String doInBackground(Void... params) {
+
+            return "try";
+        }
+    }
 }
+
+
+
+
+
+
