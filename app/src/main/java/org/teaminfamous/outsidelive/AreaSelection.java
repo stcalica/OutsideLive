@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 
 public class AreaSelection extends ActionBarActivity {
@@ -14,6 +16,16 @@ public class AreaSelection extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_area_selection);
+        ImageButton stage1 = (ImageButton) findViewById(R.id.stage1);
+        stage1.setImageResource(R.drawable.stage1_buttona);
+        startStage1Listener();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        ImageButton stage1 = (ImageButton) findViewById(R.id.stage1);
+        stage1.setImageResource(R.drawable.stage1_buttona);
     }
 
     @Override
@@ -42,4 +54,22 @@ public class AreaSelection extends ActionBarActivity {
         Intent stage_activity = new Intent(this, StageAcitivity.class);
         startActivity(stage_activity);
     }//start new intent
+
+    public void startStage1Listener() {
+
+        final ImageButton stage1 = (ImageButton) findViewById(R.id.stage1);
+
+        stage1.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent stage_activity = new Intent(AreaSelection.this, StageAcitivity.class);
+                startActivity(stage_activity);
+
+                    stage1.setImageResource(R.drawable.stage1_buttonb);
+            }
+
+        });
+
+    }
 }
