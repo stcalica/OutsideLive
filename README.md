@@ -12,7 +12,7 @@ Inspired by trying to create an easier way to create a Silent Disco for free.
 How it works: 
 
 1. "A DJ will create an event in the application."   
-  The application will call our API which will then create a spot instance (a short lived server) which will be spun up to have icecast and then it will return with the IP Address 
+  The application will call our API which will then create a spot instance (a short lived server) on Outsidelive's servers which will be spun up to have icecast and then it will return with the IP Address 
     
 2. "The DJ will wait for the response which will have an IP Address and will use that to put into his DAW."
 
